@@ -1,0 +1,40 @@
+/* Imports from Google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/*? (1). Variables */
+:root {
+  --primary-font: 'Lato', sans-serif;
+  --secondary-font: 'Montserrat', sans-serif;
+  --dark-grey: #5e5e5e;
+  --dark: #060a24;
+  --light: #ffffff;
+  --blue: #0000ec;
+  --aquamarine: #00f3bb;
+  --grey: rgba(6, 10, 36, 0.56);
+  --content-padding: 5%;
+}
+/*?---------------------------*/
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #e5e5e5;
+  overflow-x: hidden;
+}
+
+.primary-bold {
+  font-family: var(--primary-font);
+  font-weight: 700;
+}
+
+.primary-regular {
+  font-family: var(--primary-font);
+  font-weight: 400;
+}
