@@ -1,14 +1,14 @@
 <template>
-  <div>
-    <start-view />
+  <div class="app-container">
+    <welcome-view />
   </div>
 </template>
 
 <script>
-import StartView from '@/components/StartView.vue'
+import WelcomeView from '@/components/WelcomeView.vue'
 export default {
   components: {
-    StartView,
+    WelcomeView,
   },
 }
 </script>
