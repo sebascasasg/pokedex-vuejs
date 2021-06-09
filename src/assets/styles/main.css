@@ -6,10 +6,14 @@
 :root {
   --primary-font: 'Lato', sans-serif;
   --secondary-font: 'Montserrat', sans-serif;
+  --black: #353535;
   --dark-grey: #5e5e5e;
+  --grey: #bfbfbf;
+  --light-grey: #e8e8e8;
   --red: #f22539;
   --dark-red: #c00e20;
   --white: #ffffff;
+  --body-grey: #e5e5e5;
 }
 /*?---------------------------*/
 
@@ -22,7 +26,7 @@
 }
 
 body {
-  background-color: #e5e5e5;
+  background-color: var(--body-grey);
   overflow-x: hidden;
 }
 

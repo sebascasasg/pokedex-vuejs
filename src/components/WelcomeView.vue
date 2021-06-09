@@ -10,7 +10,7 @@
     <p class="primary-regular intro">
       The digital encyclopedia created by Professor Oak is an invaluable tool to Trainers in the Pokémon world.
     </p>
-    <app-button :text="'Get started'" @click="handleButtonClick" />
+    <app-button @click="handleButtonClick" class="button">Get started</app-button>
   </div>
 </template>
 
@@ -30,7 +30,7 @@ export default {
 
 <style scoped>
 .flex-container {
-  margin-top: 70px;
+  margin: 70px 0;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -59,6 +59,7 @@ export default {
   font-size: 26px;
   line-height: 31px;
   text-align: center;
+  color: var(--black);
 }
 .intro {
   width: 315px;
@@ -68,13 +69,17 @@ export default {
   color: var(--dark-grey);
   text-align: center;
 }
+.button:hover,
+.button:focus {
+  background-color: var(--dark-red);
+}
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 768px) {
   .intro {
     width: 560px;
   }
   .flex-container {
-    margin-top: 0;
+    margin: 0;
     position: relative;
     top: 50vh;
     transform: translateY(-50%);

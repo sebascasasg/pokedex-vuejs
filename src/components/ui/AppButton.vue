@@ -1,17 +1,8 @@
 <template>
-  <button class="button primary-bold">{{ text }}</button>
+  <button class="button primary-bold">
+    <slot />
+  </button>
 </template>
-
-<script>
-export default {
-  props: {
-    text: {
-      type: String,
-      default: 'Click me!',
-    },
-  },
-}
-</script>
 
 <style scoped>
 .button {
@@ -22,9 +13,5 @@ export default {
   border: none;
   border-radius: 60px;
   cursor: pointer;
-}
-.button:hover,
-.button:focus {
-  background-color: var(--dark-red);
 }
 </style>
