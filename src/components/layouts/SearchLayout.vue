@@ -5,8 +5,8 @@
     </header>
     <slot />
     <footer class="bottom-bar">
-      <app-button class="button"> <img :src="require('@/assets/images/all-button-icon.svg')" alt="" class="button-img" /><span>All</span> </app-button>
-      <app-button class="button"> <img :src="require('@/assets/images/favorites-button-icon.svg')" alt="" class="button-img" /><span>Favorites</span> </app-button>
+      <app-button :class="['button', { active: isAllActive }]" @click="handleButtonClick('all')"> <img :src="require('@/assets/images/all-button-icon.svg')" alt="" class="button-img" /><span>All</span> </app-button>
+      <app-button :class="['button', { active: !isAllActive }]" @click="handleButtonClick('fav')"> <img :src="require('@/assets/images/favorites-button-icon.svg')" alt="" class="button-img" /><span>Favorites</span> </app-button>
     </footer>
   </div>
 </template>
@@ -16,13 +16,32 @@ import AppButton from '@/components/ui/AppButton.vue'
 import AppSearchBox from '@/components/ui/AppSearchBox.vue'
 export default {
   components: { AppButton, AppSearchBox },
+  emits: ['button-click'],
+  props: {
+    allActive: {
+      type: Boolean,
+    },
+  },
+  data() {
+    return {
+      isAllActive: this.allActive,
+    }
+  },
+  methods: {
+    handleButtonClick(button) {
+      if (button === 'all') {
+        this.isAllActive = true
+        this.$emit('button-click', 'all')
+      } else if (button === 'fav') {
+        this.isAllActive = false
+        this.$emit('button-click', 'fav')
+      }
+    },
+  },
 }
 </script>
 
 <style scoped>
-/* .layout-container {
-  height: 100vh;
-} */
 .header-bar {
   width: 100%;
   padding: 35px 30px 20px;
@@ -52,6 +71,10 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--grey);
+}
+.active {
+  background-color: var(--red);
 }
 .button-img {
   width: 18px;

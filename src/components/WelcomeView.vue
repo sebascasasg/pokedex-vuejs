@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-container">
+  <div class="welcome-container">
     <div class="img-container">
       <img :src="require('@/assets/images/red-circle.svg')" alt="" class="circle-img" />
       <img :src="require('@/assets/images/pikachu.svg')" alt="Happy pikachu" class="pikachu-img" />
@@ -10,7 +10,7 @@
     <p class="primary-regular intro">
       The digital encyclopedia created by Professor Oak is an invaluable tool to Trainers in the Pokémon world.
     </p>
-    <app-button @click="handleButtonClick" class="button">Get started</app-button>
+    <app-button @click="handleClick" class="button">Get started</app-button>
   </div>
 </template>
 
@@ -20,17 +20,18 @@ export default {
   components: {
     AppButton,
   },
+  emits: ['change-view'],
   methods: {
-    handleButtonClick() {
-      console.log('Click en el botón')
+    handleClick() {
+      this.$emit('change-view')
     },
   },
 }
 </script>
 
 <style scoped>
-.flex-container {
-  margin: 70px 0;
+.welcome-container {
+  padding: 70px 0;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -78,7 +79,7 @@ export default {
   .intro {
     width: 560px;
   }
-  .flex-container {
+  .welcome-container {
     margin: 0;
     position: relative;
     top: 50vh;

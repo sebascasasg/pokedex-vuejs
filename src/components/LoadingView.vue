@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-container">
+  <div class="loading-container">
     <img :src="require('@/assets/images/loader.svg')" alt="Pokéball" class="pokeball-img" />
   </div>
 </template>
@@ -9,7 +9,7 @@ export default {}
 </script>
 
 <style scoped>
-.flex-container {
+.loading-container {
   height: 100vh;
   display: flex;
   flex-direction: column;

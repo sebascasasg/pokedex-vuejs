@@ -1,27 +1,33 @@
 <template>
   <div class="app-container">
-    <welcome-view v-show="!isLoaderVisible" />
-    <loading-view v-show="!isLoaderVisible" />
-    <search-view v-show="isLoaderVisible" />
+    <welcome-view v-if="isWelcomeView" @change-view="changeView" />
+    <search-view v-else />
   </div>
 </template>
 
 <script>
 import WelcomeView from '@/components/WelcomeView.vue'
-import LoadingView from '@/components/LoadingView.vue'
 import SearchView from '@/components/SearchView.vue'
 export default {
   components: {
     WelcomeView,
-    LoadingView,
     SearchView,
   },
   data() {
     return {
-      isLoaderVisible: true,
+      isWelcomeView: true,
     }
+  },
+  methods: {
+    changeView() {
+      this.isWelcomeView = false
+    },
   },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.app-container {
+  min-height: 100vh;
+}
+</style>

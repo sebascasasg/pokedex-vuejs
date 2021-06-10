@@ -1,10 +1,6 @@
 <template>
   <ul class="list">
-    <pokemon-item class="item" v-for="pokemon in pokelist" :key="pokemon" :name="pokemon" />
-    <pokemon-item class="item" v-for="pokemon in pokelist" :key="pokemon" :name="pokemon" />
-    <pokemon-item class="item" v-for="pokemon in pokelist" :key="pokemon" :name="pokemon" />
-    <pokemon-item class="item" v-for="pokemon in pokelist" :key="pokemon" :name="pokemon" />
-    <pokemon-item class="item" v-for="pokemon in pokelist" :key="pokemon" :name="pokemon" />
+    <pokemon-item class="item" v-for="pokemon in pokemons" :key="pokemon" :name="pokemon" @click-item="selectItem" />
   </ul>
 </template>
 
@@ -12,11 +8,16 @@
 import PokemonItem from '@/components/ui/PokemonItem.vue'
 export default {
   components: { PokemonItem },
-
-  data() {
-    return {
-      pokelist: ['Bulbasaur', 'Ivysaur', 'Venusaur', 'Charmander', 'Charmeleon', 'Charizard'],
-    }
+  emits: ['select-pokemon'],
+  props: {
+    pokemons: {
+      type: Array,
+    },
+  },
+  methods: {
+    selectItem(name) {
+      this.$emit('select-pokemon', name)
+    },
   },
 }
 </script>
