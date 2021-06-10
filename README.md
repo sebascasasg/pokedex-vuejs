@@ -1,6 +1,6 @@
 # Pokédex con Vue.js
 
-Este proyecto consiste en la implementación de una aplicación tipo "Pokédex" en la que es posible ver la lista de los Pokémons (151) de la primera temporada. La aplicación permite conocer información básica de cada Pokémon, guardar una lista de los favoritos del usuario y hacer bñusqueda por texto.
+Este proyecto consiste en la implementación de una aplicación tipo "Pokédex" en la que es posible ver la lista de los Pokémons (151) de la primera temporada. La aplicación permite conocer información básica de cada Pokémon, guardar una lista de los favoritos del usuario y hacer búsqueda por texto.
 
 La aplicación fue desarrollada como Single Page Application (SPA), usando las siguientes tecnologías:
 
@@ -15,3 +15,4 @@ La aplicación fue desarrollada como Single Page Application (SPA), usando las s
 - VisualStudio Code como editor de código
 - "Vetur" y "Vue VSCode Snippets" como extensiones orientadas al flujo de trabajo con Vue.js
 - Vercel para el despliegue contínuo de la aplicación
+- Git para el control de versiones y GitHub como repositorio remoto
