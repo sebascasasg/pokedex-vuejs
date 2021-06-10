@@ -1,11 +1,12 @@
 <template>
   <div class="popup-container">
     <div class="background"></div>
-    <pokemon-card class="card" :info="pokemonInfo" @click-close="closePopup" />
+    <pokemon-card class="card" :info="pokemonInfo" :favstate="stateFavoriteList.includes(pokemonInfo.pokemon_name)" @click-close="closePopup" />
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import PokemonCard from '@/components/ui/PokemonCard.vue'
 export default {
   components: { PokemonCard },
@@ -14,6 +15,9 @@ export default {
     pokemonInfo: {
       type: Object,
     },
+  },
+  computed: {
+    ...mapState(['stateFavoriteList']),
   },
   methods: {
     closePopup() {

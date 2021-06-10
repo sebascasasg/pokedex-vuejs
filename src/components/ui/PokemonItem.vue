@@ -11,16 +11,21 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   emits: ['click-item'],
   props: {
     name: {
       type: String,
     },
+    favstate: {
+      type: Boolean,
+    },
   },
   data() {
     return {
-      isFavorite: false,
+      isFavorite: this.favstate,
     }
   },
   methods: {
@@ -29,8 +34,15 @@ export default {
     },
     handleFavClick(event) {
       event.stopPropagation()
+      if (this.isFavorite) {
+        console.log('remove')
+        this.removeFavoritePokemon(this.name)
+      } else {
+        this.addFavoritePokemon(this.name)
+      }
       this.isFavorite = !this.isFavorite
     },
+    ...mapActions(['addFavoritePokemon', 'removeFavoritePokemon']),
   },
 }
 </script>

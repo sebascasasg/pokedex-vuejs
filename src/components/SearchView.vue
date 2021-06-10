@@ -1,7 +1,7 @@
 <template>
   <div class="search-container">
     <search-layout class="layout" v-if="!isLoading" :all-active="allListActive" @button-click="toggleListView" @change-search="searchByTerm">
-      <pokemon-list class="list" :pokemons="pokemons" @select-pokemon="showPokemonInfo" />
+      <pokemon-list class="list" :pokemons="pokemons" @select-pokemon="showPokemonInfo" :key="componentKey" />
     </search-layout>
     <loading-view v-else />
     <app-popup v-if="popupVisibility" :pokemon-info="pokemonInfo" @close-popup="hidePopup" />
@@ -9,16 +9,21 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import SearchLayout from '@/components/layouts/SearchLayout.vue'
 import PokemonList from '@/components/ui/PokemonList.vue'
 import AppPopup from '@/components/ui/AppPopup.vue'
 import LoadingView from '@/components/LoadingView.vue'
+
 export default {
   components: {
     SearchLayout,
     PokemonList,
     AppPopup,
     LoadingView,
+  },
+  computed: {
+    ...mapState(['stateFavoriteList']),
   },
   data() {
     return {
@@ -28,7 +33,7 @@ export default {
       isLoading: true,
       popupVisibility: false,
       allListActive: true,
-      favorites: ['pikachu', 'charizard', 'bulbasaur'],
+      componentKey: true,
     }
   },
   methods: {
@@ -41,13 +46,21 @@ export default {
         })
     },
     hidePopup() {
+      if (this.allListActive) {
+        this.pokemons = this.fetchedData
+        this.componentKey = !this.componentKey
+      } else {
+        this.pokemons = this.stateFavoriteList
+      }
       this.popupVisibility = false
     },
     toggleListView(list) {
       if (list === 'all') {
+        this.allListActive = true
         this.pokemons = this.fetchedData
       } else if (list === 'fav') {
-        this.pokemons = this.favorites
+        this.allListActive = false
+        this.pokemons = this.stateFavoriteList
       }
     },
     searchByTerm(searchTerm) {

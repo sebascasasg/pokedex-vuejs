@@ -19,9 +19,9 @@
     </div>
     <div class="share-container">
       <app-button @click="copyToClipboard" class="button">Share to my friends</app-button>
-      <div class="favstar-container">
+      <div class="favstar-container" @click="handleFavClick">
         <img :src="require('@/assets/images/star-circle.svg')" alt="" class="star-base" />
-        <img :src="require('@/assets/images/normal-star.svg')" alt="" class="star" />
+        <img :src="isFavorite ? require('@/assets/images/active-star.svg') : require('@/assets/images/normal-star.svg')" alt="" class="star" />
       </div>
     </div>
     <img :src="require('@/assets/images/close-button.svg')" alt="" class="close-button" @click="handleCloseClick" />
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import AppButton from '@/components/ui/AppButton.vue'
 export default {
   components: {
@@ -39,6 +40,14 @@ export default {
     info: {
       type: Object,
     },
+    favstate: {
+      type: Boolean,
+    },
+  },
+  data() {
+    return {
+      isFavorite: this.favstate,
+    }
   },
   methods: {
     getPokemonTypes(typesList) {
@@ -53,6 +62,17 @@ export default {
         .then(() => console.log('Texto copiado al portapapeles'))
         .catch(error => console.error(error))
     },
+    handleFavClick(event) {
+      event.stopPropagation()
+      if (this.isFavorite) {
+        console.log('remove')
+        this.removeFavoritePokemon(this.info.pokemon_name)
+      } else {
+        this.addFavoritePokemon(this.info.pokemon_name)
+      }
+      this.isFavorite = !this.isFavorite
+    },
+    ...mapActions(['addFavoritePokemon', 'removeFavoritePokemon']),
   },
 }
 </script>
