@@ -1,9 +1,10 @@
 import { createStore } from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
 const store = createStore({
   state() {
     return {
-      stateFavoriteList: ['pikachu'],
+      stateFavoriteList: [],
     }
   },
   actions: {
@@ -29,6 +30,7 @@ const store = createStore({
       state.stateFavoriteList.splice(index, 1)
     },
   },
+  plugins: [createPersistedState()],
 })
 
 export default store
