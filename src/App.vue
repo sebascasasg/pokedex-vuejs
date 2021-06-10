@@ -1,13 +1,13 @@
 <template>
   <div class="app-container">
-    <welcome-view v-if="isWelcomeView" @change-view="changeView" />
-    <search-view v-else />
+    <welcome-view v-if="isWelcomeView" @change-view="goToSearch" />
+    <search-view v-else @change-view="goToHome" />
   </div>
 </template>
 
 <script>
-import WelcomeView from '@/components/WelcomeView.vue'
-import SearchView from '@/components/SearchView.vue'
+import WelcomeView from '@/components/views/WelcomeView.vue'
+import SearchView from '@/components/views/SearchView.vue'
 export default {
   components: {
     WelcomeView,
@@ -19,8 +19,11 @@ export default {
     }
   },
   methods: {
-    changeView() {
+    goToSearch() {
       this.isWelcomeView = false
+    },
+    goToHome() {
+      this.isWelcomeView = true
     },
   },
 }
