@@ -1,7 +1,8 @@
 <template>
   <div class="search-container">
     <search-layout class="layout" v-if="!isLoading" :all-active="allListActive" @button-click="toggleListView" @change-search="searchByTerm">
-      <pokemon-list class="list" :pokemons="pokemons" @select-pokemon="showPokemonInfo" :key="componentKey" />
+      <pokemon-list v-if="succesfulSearch" class="list" :pokemons="pokemons" @select-pokemon="showPokemonInfo" :key="componentKey" />
+      <error-view v-else @click-button="backToHome" />
     </search-layout>
     <loading-view v-else />
     <app-popup v-if="popupVisibility" :pokemon-info="pokemonInfo" @close-popup="hidePopup" />
@@ -10,10 +11,11 @@
 
 <script>
 import { mapState } from 'vuex'
+import ErrorView from '@/components/views/ErrorView.vue'
 import SearchLayout from '@/components/layouts/SearchLayout.vue'
 import PokemonList from '@/components/ui/PokemonList.vue'
 import AppPopup from '@/components/ui/AppPopup.vue'
-import LoadingView from '@/components/LoadingView.vue'
+import LoadingView from '@/components/views/LoadingView.vue'
 
 export default {
   components: {
@@ -21,7 +23,9 @@ export default {
     PokemonList,
     AppPopup,
     LoadingView,
+    ErrorView,
   },
+  emits: ['change-view'],
   computed: {
     ...mapState(['stateFavoriteList']),
   },
@@ -34,6 +38,7 @@ export default {
       popupVisibility: false,
       allListActive: true,
       componentKey: true,
+      succesfulSearch: true,
     }
   },
   methods: {
@@ -67,6 +72,10 @@ export default {
       this.pokemons = this.fetchedData.filter(pokemon => {
         return pokemon.match(searchTerm)
       })
+      this.succesfulSearch = this.pokemons.length
+    },
+    backToHome() {
+      this.$emit('change-view')
     },
   },
   created() {
