@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="share-container">
-      <app-button>Share to my friends</app-button>
+      <app-button @click="copyToClipboard" class="button">Share to my friends</app-button>
       <div class="favstar-container">
         <img :src="require('@/assets/images/star-circle.svg')" alt="" class="star-base" />
         <img :src="require('@/assets/images/normal-star.svg')" alt="" class="star" />
@@ -46,6 +46,12 @@ export default {
     },
     handleCloseClick() {
       this.$emit('click-close')
+    },
+    copyToClipboard() {
+      navigator.clipboard
+        .writeText(`Name: ${this.info.pokemon_name}, Weight: ${this.info.weight}, Height: ${this.info.height}, Types: ${this.getPokemonTypes(this.info.types)}`)
+        .then(() => console.log('Texto copiado al portapapeles'))
+        .catch(error => console.error(error))
     },
   },
 }
@@ -104,6 +110,9 @@ export default {
   top: 15px;
   right: 15px;
   cursor: pointer;
+}
+.button:hover {
+  background-color: var(--dark-red);
 }
 @media only screen and (min-width: 768px) {
   .card-container {

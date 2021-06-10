@@ -1,8 +1,6 @@
-/* Imports from Google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-/*? (1). Variables */
 :root {
   --primary-font: 'Lato', sans-serif;
   --secondary-font: 'Montserrat', sans-serif;
@@ -15,7 +13,6 @@
   --red: #f22539;
   --white: #ffffff;
 }
-/*?---------------------------*/
 
 *,
 *::before,
