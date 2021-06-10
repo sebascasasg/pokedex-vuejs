@@ -39,6 +39,7 @@ export default {
       allListActive: true,
       componentKey: true,
       succesfulSearch: true,
+      searchTerm: '',
     }
   },
   methods: {
@@ -62,16 +63,23 @@ export default {
     toggleListView(list) {
       if (list === 'all') {
         this.allListActive = true
-        this.pokemons = this.fetchedData
+        this.searchByTerm(this.searchTerm)
       } else if (list === 'fav') {
         this.allListActive = false
-        this.pokemons = this.stateFavoriteList
+        this.searchByTerm(this.searchTerm)
       }
     },
-    searchByTerm(searchTerm) {
-      this.pokemons = this.fetchedData.filter(pokemon => {
-        return pokemon.match(searchTerm)
-      })
+    searchByTerm(search) {
+      if (this.allListActive) {
+        this.pokemons = this.fetchedData.filter(pokemon => {
+          return pokemon.match(search)
+        })
+      } else {
+        this.pokemons = this.stateFavoriteList.filter(pokemon => {
+          return pokemon.match(search)
+        })
+      }
+      this.searchTerm = search
       this.succesfulSearch = this.pokemons.length
     },
     backToHome() {

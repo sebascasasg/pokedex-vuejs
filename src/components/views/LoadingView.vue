@@ -4,10 +4,6 @@
   </div>
 </template>
 
-<script>
-export default {}
-</script>
-
 <style scoped>
 .loading-container {
   height: 100vh;
@@ -18,5 +14,15 @@ export default {}
 }
 .pokeball-img {
   width: 106px;
+  animation: pokeball-animation 2s infinite linear;
+}
+
+@keyframes pokeball-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>
