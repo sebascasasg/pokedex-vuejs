@@ -72,11 +72,11 @@ export default {
     searchByTerm(search) {
       if (this.allListActive) {
         this.pokemons = this.fetchedData.filter(pokemon => {
-          return pokemon.match(search)
+          return pokemon.match(search.toLowerCase())
         })
       } else {
         this.pokemons = this.stateFavoriteList.filter(pokemon => {
-          return pokemon.match(search)
+          return pokemon.match(search.toLowerCase())
         })
       }
       this.searchTerm = search
