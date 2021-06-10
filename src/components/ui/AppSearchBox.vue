@@ -1,9 +1,21 @@
 <template>
-  <input type="text" class="searchbox" placeholder="Search" />
+  <input type="text" class="searchbox" placeholder="Search" v-model="search" />
 </template>
 
 <script>
-export default {}
+export default {
+  emits: ['change-term'],
+  data() {
+    return {
+      search: '',
+    }
+  },
+  watch: {
+    search(newValue) {
+      this.$emit('change-term', newValue)
+    },
+  },
+}
 </script>
 
 <style scoped>

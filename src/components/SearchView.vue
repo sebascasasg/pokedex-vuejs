@@ -1,6 +1,6 @@
 <template>
   <div class="search-container">
-    <search-layout class="layout" v-if="!isLoading" :all-active="allListActive" @button-click="toggleListView">
+    <search-layout class="layout" v-if="!isLoading" :all-active="allListActive" @button-click="toggleListView" @change-search="searchByTerm">
       <pokemon-list class="list" :pokemons="pokemons" @select-pokemon="showPokemonInfo" />
     </search-layout>
     <loading-view v-else />
@@ -49,6 +49,11 @@ export default {
       } else if (list === 'fav') {
         this.pokemons = this.favorites
       }
+    },
+    searchByTerm(searchTerm) {
+      this.pokemons = this.fetchedData.filter(pokemon => {
+        return pokemon.match(searchTerm)
+      })
     },
   },
   created() {

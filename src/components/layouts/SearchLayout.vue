@@ -1,7 +1,7 @@
 <template>
   <div class="layout-container">
     <header class="header-bar">
-      <app-search-box class="searchbox" />
+      <app-search-box class="searchbox" @change-term="searchChangeHandler" />
     </header>
     <slot />
     <footer class="bottom-bar">
@@ -16,7 +16,7 @@ import AppButton from '@/components/ui/AppButton.vue'
 import AppSearchBox from '@/components/ui/AppSearchBox.vue'
 export default {
   components: { AppButton, AppSearchBox },
-  emits: ['button-click'],
+  emits: ['button-click', 'change-search'],
   props: {
     allActive: {
       type: Boolean,
@@ -36,6 +36,9 @@ export default {
         this.isAllActive = false
         this.$emit('button-click', 'fav')
       }
+    },
+    searchChangeHandler(searchValue) {
+      this.$emit('change-search', searchValue)
     },
   },
 }
